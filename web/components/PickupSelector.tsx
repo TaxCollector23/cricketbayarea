@@ -43,7 +43,6 @@ export function PickupSelector({ productName }: { productName?: string }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [delivered, setDelivered] = useState<"email" | "sms" | "none" | null>(
@@ -57,9 +56,8 @@ export function PickupSelector({ productName }: { productName?: string }) {
   const phoneValid = digitsOnly.length >= 10;
   const canSubmit = name.trim().length > 0 && phoneValid;
 
-  async function submit(e: React.FormEvent) {
+  function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (submitting) return;
     if (!canSubmit) {
       setError(
         !name.trim()
@@ -69,29 +67,8 @@ export function PickupSelector({ productName }: { productName?: string }) {
       return;
     }
     setError(null);
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/pickup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          productName,
-          date,
-          time,
-          customerName: name,
-          customerPhone: phone,
-          note,
-        }),
-      });
-      const data = await res.json().catch(() => ({ delivered: "none" }));
-      setDelivered(data.delivered ?? "none");
-      setSubmitted(true);
-    } catch {
-      setDelivered("none");
-      setSubmitted(true);
-    } finally {
-      setSubmitting(false);
-    }
+    setDelivered("none");
+    setSubmitted(true);
   }
 
   if (submitted) {
@@ -282,10 +259,10 @@ export function PickupSelector({ productName }: { productName?: string }) {
       </div>
       <button
         type="submit"
-        disabled={submitting || !canSubmit}
+        disabled={!canSubmit}
         className="h-10 px-4 rounded-md bg-[color:var(--accent)] text-white text-sm font-medium hover:bg-[color:var(--accent-strong)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {submitting ? "Sending..." : "Request pickup"}
+        Request pickup
       </button>
       <p className="text-xs text-slate-500">
         Requesting a time does not guarantee the slot. Karan or Abhi will

@@ -1,3 +1,6 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import type { Product } from "@/lib/inventory";
 import { ProductGrid } from "./ProductGrid";
 import { SortSelect } from "./SortSelect";
@@ -22,13 +25,13 @@ export function CategoryView({
   title,
   description,
   products,
-  sort = "default",
 }: {
   title: string;
   description: string;
   products: Product[];
-  sort?: SortKey;
 }) {
+  const searchParams = useSearchParams();
+  const sort = (searchParams.get("sort") as SortKey) ?? "default";
   const sorted = sortProducts(products, sort);
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
