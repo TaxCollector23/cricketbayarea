@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Product } from "@/lib/inventory";
 import { formatPrice } from "@/lib/format";
 import { StockBadge } from "./StockBadge";
+import { assetUrl } from "@/lib/assets";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -12,12 +12,12 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="aspect-[4/5] bg-[color:var(--surface)] relative flex items-center justify-center overflow-hidden">
         {product.image ? (
-          <Image
-            src={product.image}
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={assetUrl(product.image)}
             alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+            className="h-full w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+            loading="lazy"
           />
         ) : (
           <span className="text-slate-400 text-xs uppercase tracking-wide">

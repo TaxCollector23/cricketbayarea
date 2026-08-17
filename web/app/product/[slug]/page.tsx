@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
+import { assetUrl } from "@/lib/assets";
 import { getProductBySlug, getProducts } from "@/lib/inventory";
 import { formatPrice } from "@/lib/format";
 import { StockBadge } from "@/components/StockBadge";
@@ -54,12 +54,11 @@ export default async function ProductPage({
       <div className="grid gap-10 lg:grid-cols-2">
         <div className="aspect-[4/5] w-full bg-neutral-50 rounded-md flex items-center justify-center overflow-hidden border border-[color:var(--border)]">
           {product.image ? (
-            <Image
-              src={product.image}
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={assetUrl(product.image)}
               alt={product.name}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="h-full w-full object-cover"
             />
           ) : (
             <span className="text-neutral-400 text-xs uppercase tracking-wide">

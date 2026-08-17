@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   getCategoryMinPrice,
   getProducts,
@@ -15,6 +14,7 @@ import {
   SHOP_TAGLINE,
 } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
+import { assetUrl } from "@/lib/assets";
 
 export default async function Home() {
   const products = await getProducts();
@@ -77,7 +77,7 @@ export default async function Home() {
                     {cover ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        src={cover}
+                        src={assetUrl(cover)}
                         alt={c}
                         className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                         loading="lazy"

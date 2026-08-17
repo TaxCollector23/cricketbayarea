@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { SHOP_NAME } from "@/lib/config";
+import { assetUrl } from "@/lib/assets";
 
 const NAV = [
   { href: "/bats", label: "Bats" },
@@ -20,12 +20,12 @@ export function Header() {
           className="flex items-center gap-3 whitespace-nowrap"
           aria-label={SHOP_NAME}
         >
-          <Image
-            src="/logo-v3.png"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={assetUrl("/logo-v3.png")}
             alt=""
             width={80}
             height={80}
-            priority
             className="h-20 w-20 object-contain"
           />
           <span className="text-base sm:text-lg font-semibold tracking-tight">
