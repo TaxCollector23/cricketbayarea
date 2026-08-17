@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    # Rebuild daily at 8 AM UTC (1 AM PT / 4 AM ET).
+    # This picks up any Google Sheet changes made the previous day.
+    - cron: "0 8 * * *"
 
 permissions:
   contents: read
@@ -33,6 +37,10 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: web
+        env:
+          # Set this secret in GitHub → Settings → Secrets → Actions
+          # Value: the CSV export URL of your Google Sheet
+          INVENTORY_CSV_URL: ${{ secrets.INVENTORY_CSV_URL }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
