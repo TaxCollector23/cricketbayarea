@@ -110,15 +110,15 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Products preview */}
+        {/* Inventory preview */}
         <section className="py-8">
           <div className="flex items-baseline justify-between mb-4">
-            <h2 className="text-lg font-semibold">Current products</h2>
+            <h2 className="text-lg font-semibold">Current inventory</h2>
             <Link
-              href="/bats"
+              href="/search"
               className="text-sm text-[color:var(--accent)] hover:text-[color:var(--accent-strong)]"
             >
-              View all bats
+              Search inventory
             </Link>
           </div>
           <ProductGrid
@@ -134,14 +134,15 @@ export default async function Home() {
           <div>
             <h2 className="text-lg font-semibold">Local pickup</h2>
             <p className="mt-2 text-sm text-slate-700 max-w-md">
-              Pick a date and time on any product page. We confirm the slot by
-              phone. No shipping. No online payment.
+              Choose a pickup time, then text or WhatsApp us with the details.
+              We confirm the slot before you come. No shipping. No online
+              payment.
             </p>
             <Link
               href="/pickup"
               className="mt-4 inline-flex h-10 items-center px-4 rounded-md bg-[color:var(--accent)] text-white text-sm font-medium hover:bg-[color:var(--accent-strong)]"
             >
-              Go to pickup
+              Choose a pickup time
             </Link>
           </div>
           <div>

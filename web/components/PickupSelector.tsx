@@ -45,9 +45,6 @@ export function PickupSelector({ productName }: { productName?: string }) {
   const [note, setNote] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [delivered, setDelivered] = useState<"email" | "sms" | "none" | null>(
-    null,
-  );
 
   const dayLabel = days.find((d) => d.value === date)?.label ?? date;
   const smsBody = `Hi, I'd like to pick up ${productName ?? "cricket gear"} on ${dayLabel} at ${time}. My name is ${name || "..."}${phone ? `, phone ${phone}` : ""}.${note ? " Note: " + note : ""}`;
@@ -67,16 +64,15 @@ export function PickupSelector({ productName }: { productName?: string }) {
       return;
     }
     setError(null);
-    setDelivered("none");
     setSubmitted(true);
   }
 
   if (submitted) {
     return (
       <div className="rounded-lg border border-[color:var(--accent-soft-2)] bg-[color:var(--accent-soft)] p-5">
-        <div className="text-base font-semibold text-[color:var(--accent-strong)]">
-          Pickup requested
-        </div>
+        <h2 className="text-base font-semibold text-[color:var(--accent-strong)]">
+          Pickup details ready to send
+        </h2>
         <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
           {productName && (
             <>
@@ -103,9 +99,8 @@ export function PickupSelector({ productName }: { productName?: string }) {
         </dl>
 
         <p className="mt-4 text-sm text-slate-700">
-          {delivered === "email" || delivered === "sms"
-            ? "We received your request. Karan or Abhi will confirm shortly."
-            : "Send the details straight to Karan or Abhi to lock it in:"}
+          Nothing has been sent yet. Choose a contact option below to send
+          these details, then wait for confirmation before you come.
         </p>
 
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -165,6 +160,14 @@ export function PickupSelector({ productName }: { productName?: string }) {
       onSubmit={submit}
       className="rounded-lg border border-[color:var(--border)] p-5 bg-white space-y-4"
     >
+      <div>
+        <h2 className="text-base font-semibold">
+          {productName ? "Plan pickup for this item" : "Plan a pickup"}
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Choose a time, then send the details by text or WhatsApp.
+        </p>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="pickup-date" className="block text-sm font-medium">
@@ -262,11 +265,10 @@ export function PickupSelector({ productName }: { productName?: string }) {
         disabled={!canSubmit}
         className="h-10 px-4 rounded-md bg-[color:var(--accent)] text-white text-sm font-medium hover:bg-[color:var(--accent-strong)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Request pickup
+        Continue to contact options
       </button>
       <p className="text-xs text-slate-500">
-        Requesting a time does not guarantee the slot. Karan or Abhi will
-        confirm by phone.
+        Your time is not reserved until Karan or Abhi confirms it.
       </p>
     </form>
   );

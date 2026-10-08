@@ -230,6 +230,10 @@ export async function getCategoryMinPrice(
   category: Category,
 ): Promise<number | null> {
   const items = await getProductsByCategory(category);
-  if (items.length === 0) return null;
-  return items.reduce((m, p) => (p.price < m ? p.price : m), items[0].price);
+  const available = items.filter((p) => p.stock > 0);
+  if (available.length === 0) return null;
+  return available.reduce(
+    (m, p) => (p.price < m ? p.price : m),
+    available[0].price,
+  );
 }

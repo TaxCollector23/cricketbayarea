@@ -84,10 +84,10 @@ export default async function ProductPage({
               <PickupSelector productName={product.name} />
             ) : (
               <div className="rounded-lg border border-[color:var(--border)] p-5 bg-white">
-                <div className="font-medium">Out of stock</div>
+                <div className="font-medium">Ask about the next batch</div>
                 <p className="mt-1 text-sm text-slate-600">
-                  This product is not available for pickup right now. Ask us
-                  when the next batch is expected.
+                  This product is currently out of stock. Ask us when the next
+                  batch is expected.
                 </p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {CONTACTS.map((c) => (

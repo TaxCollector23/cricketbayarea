@@ -11,8 +11,8 @@ export default function PickupPage() {
         Pickup
       </h1>
       <p className="mt-2 text-neutral-600">
-        Select a date and time for pickup. The shop will confirm your time by
-        phone.
+        Choose a date and time, then send the details by text or WhatsApp so we
+        can confirm your pickup.
       </p>
 
       <div className="mt-8 grid gap-8 md:grid-cols-2">

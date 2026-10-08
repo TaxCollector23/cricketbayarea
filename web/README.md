@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cricket Bay Area
 
-## Getting Started
+Static Next.js catalog for cricket equipment available for local pickup in the Bay Area.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:1111/cricketbayarea/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Inventory
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The site reads `data/inventory.csv` by default. To build from a published Google Sheet CSV export, set `INVENTORY_CSV_URL` in the build environment. The sheet must include these columns:
 
-## Learn More
+```text
+Product Name,Category,Price,Stock,Image
+```
 
-To learn more about Next.js, take a look at the following resources:
+Accepted categories are `Bats`, `Balls`, and `Kitbags`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Checks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+npm run build
+```
 
-## Deploy on Vercel
+The build creates a static export in `out/` with the `/cricketbayarea` base path used by GitHub Pages.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`.github/workflows/deploy.yml` builds `web/` and deploys `web/out` to GitHub Pages whenever `main` changes. The workflow also runs daily so a configured Google Sheet export can refresh the catalog.
