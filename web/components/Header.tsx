@@ -3,11 +3,11 @@ import { SHOP_NAME } from "@/lib/config";
 import { assetUrl } from "@/lib/assets";
 
 const NAV = [
+  { href: "/products", label: "All products" },
   { href: "/bats", label: "Bats" },
   { href: "/balls", label: "Balls" },
   { href: "/kitbags", label: "Kitbags" },
   { href: "/pickup", label: "Pickup" },
-  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 

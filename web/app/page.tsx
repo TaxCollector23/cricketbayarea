@@ -41,7 +41,7 @@ export default async function Home() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/bats"
+              href="/products"
               className="h-11 inline-flex items-center px-5 rounded-md bg-[color:var(--accent)] text-white text-sm font-medium hover:bg-[color:var(--accent-strong)] transition-colors"
             >
               Browse products

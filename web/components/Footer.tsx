@@ -16,6 +16,9 @@ export function Footer() {
           <div className="font-medium mb-2">Shop</div>
           <ul className="space-y-1 text-neutral-700">
             <li>
+              <Link href="/products">All products</Link>
+            </li>
+            <li>
               <Link href="/bats">Bats</Link>
             </li>
             <li>
@@ -26,9 +29,6 @@ export function Footer() {
             </li>
             <li>
               <Link href="/pickup">Pickup</Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
             </li>
             <li>
               <Link href="/contact">Contact</Link>
